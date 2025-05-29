@@ -1,0 +1,48 @@
+import { NextResponse } from "next/server"
+
+export const dynamic = "force-static"
+
+export async function GET() {
+  const robotsTxt = `User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /login/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important pages
+Allow: /api/og
+
+# Sitemap
+Sitemap: https://averrabyte.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Specific rules for different bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /`
+
+  return new NextResponse(robotsTxt, {
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  })
+}
